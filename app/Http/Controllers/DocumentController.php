@@ -39,7 +39,8 @@ class DocumentController extends Controller
     public function store(Request $request)
     {
         $file_name = $request->file('document')->getClientOriginalName();
-        $path = Storage::putFileAs('Documents', $request->document, $file_name, ['visibility' => 'public']);
+//        $path = Storage::putFileAs('Documents', $request->document, $file_name, ['visibility' => 'public']); // If the bucket has public access
+        $path = Storage::putFileAs('Documents', $request->document, $file_name); // If bucket has no public access
         $request->merge([
             'file_name' => $file_name,
             'file_path' => $path,
